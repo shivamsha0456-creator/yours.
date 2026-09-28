@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tumhare Liye</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Quicksand:wght@500;600&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
+<meta name="theme-color" content="#ff8db3">
+<style>
+:root{--bg:#fff2f7;--bg2:#ffd6e7;--card:#ffffffd9;--ink:#5b2a4e;--soft:#96617f;--rose:#ff5c93;--gold:#f6a23a;--line:#ff5c9333;--cloud:#ffffffcc;--star:#ffb84d;--staro:.7;--orb:radial-gradient(circle,#fff6c9,#ffc98a);--orbsh:0 0 60px 24px #ffc98a88}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#241238;--bg2:#3d1c5a;--card:#ffffff14;--ink:#ffeaf3;--soft:#dcb8d0;--rose:#ff8db3;--gold:#ffc76b;--line:#ffffff26;--cloud:#ffffff17;--star:#fff;--staro:1;--orb:transparent;--orbsh:-14px 9px 0 0 #fff0d0,-14px 9px 34px 4px #fff0d055}}
+:root[data-theme=dark]{--bg:#241238;--bg2:#3d1c5a;--card:#ffffff14;--ink:#ffeaf3;--soft:#dcb8d0;--rose:#ff8db3;--gold:#ffc76b;--line:#ffffff26;--cloud:#ffffff17;--star:#fff;--staro:1;--orb:transparent;--orbsh:-14px 9px 0 0 #fff0d0,-14px 9px 34px 4px #fff0d055}
+*{box-sizing:border-box;margin:0}
+html,body{height:100%}
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{background:radial-gradient(120% 90% at 50% 0%,var(--bg2),var(--bg));color:var(--ink);font-family:Hind,sans-serif;font-size:17px;line-height:1.7;overflow:hidden}
+h1,h2{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:600;line-height:1.15}
+h1{font-size:clamp(2.4rem,9vw,4.6rem)}h2{font-size:clamp(1.9rem,6vw,3rem);margin-bottom:.6rem}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--rose);outline-offset:3px}
+#hearts{position:fixed;inset:0;pointer-events:none;overflow:hidden}
+.fh{position:absolute;bottom:-40px;color:var(--rose);opacity:.35;animation:up linear forwards}
+@keyframes up{to{transform:translateY(-110vh) rotate(25deg);opacity:0}}
+header{position:fixed;top:env(safe-area-inset-top,0px);left:0;right:0;display:flex;justify-content:space-between;align-items:center;padding:.8rem 1rem;z-index:5}
+.tog{background:var(--card);border:1px solid var(--line);border-radius:99px;padding:.3rem .9rem;backdrop-filter:blur(6px)}
+#dots{display:flex;gap:.5rem}
+#dots button{width:10px;height:10px;border-radius:50%;border:1px solid var(--rose);background:none;padding:0}
+#dots button.on{background:var(--rose);transform:scale(1.35)}
+main{height:100%;position:relative}
+.page{position:absolute;inset:0;display:none;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:4.5rem 1.3rem 5.5rem;overflow-y:auto}
+.page.show{display:flex;animation:in .7s ease both}
+@keyframes in{from{opacity:0;transform:translateX(var(--dx,30px))}}
+.wrap{max-width:640px;width:100%;margin:auto}
+p.lead{color:var(--soft);margin:.6rem auto 1.4rem;max-width:34rem}
+.btn{background:var(--rose);color:#fff;border:0;border-radius:99px;padding:.7rem 1.8rem;box-shadow:0 8px 24px #c9456f44;transition:transform .2s}
+.btn:hover{transform:translateY(-2px)}
+.big-heart{font-size:5rem;color:var(--rose);animation:beat 1.6s infinite;display:inline-block}
+@keyframes beat{50%{transform:scale(1.15)}}
+#type{min-height:9.5em;font-family:'Cormorant Garamond',serif;font-size:1.45rem;font-style:italic;text-align:left;border-left:2px solid var(--gold);padding-left:1rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:.9rem}
+.flip{perspective:800px;height:150px;background:none;border:0;padding:0}
+.flip i{display:block;position:relative;width:100%;height:100%;transition:transform .7s;transform-style:preserve-3d;font-style:normal}
+.flip.f i{transform:rotateY(180deg)}
+.flip b,.flip u{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:.8rem;border-radius:18px;border:1px solid var(--line);backface-visibility:hidden;text-decoration:none;background:var(--card);font-weight:400;font-size:.95rem}
+.flip b{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-style:italic}
+.flip u{transform:rotateY(180deg);border-color:var(--gold)}
+input[type=range]{width:100%;accent-color:var(--rose);margin:1.2rem 0}
+#msg{min-height:4.5em;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.4rem}
+#sh{display:inline-block;font-size:3rem;color:var(--rose);transition:transform .2s}
+.tl{text-align:left;border-left:2px solid var(--gold);padding-left:1.2rem;display:grid;gap:.8rem}
+.tl button{display:block;width:100%;text-align:left;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:.6rem 1rem}
+.tl button strong{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-style:italic;color:var(--rose)}
+.tl span{display:none;color:var(--soft);font-size:.95rem}
+.tl button.o span{display:block}
+.pr{display:grid;gap:.7rem;text-align:left}
+.pr button{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:.7rem 1rem;display:flex;gap:.8rem;align-items:center;transition:.3s}
+.pr button.d{border-color:var(--gold);background:#e8c27a22}
+.pr button::before{content:"♡";color:var(--rose);font-size:1.3rem}
+.pr button.d::before{content:"♥"}
+#env{width:min(300px,80vw);height:190px;margin:0 auto;position:relative;background:var(--rose);border-radius:8px;border:0;padding:0;box-shadow:0 12px 30px #0003;transition:transform .5s}
+#env::before{content:"";position:absolute;inset:0;background:linear-gradient(to bottom right,transparent 49%,#0002 50%) left/50% 100% no-repeat,linear-gradient(to bottom left,transparent 49%,#0002 50%) right/50% 100% no-repeat;border-radius:8px}
+#env span{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:2.4rem;color:#fff;animation:beat 1.6s infinite}
+#letter{display:none;text-align:left;font-family:Caveat,cursive;font-size:1.55rem;line-height:1.55;background:var(--card);border:1px solid var(--gold);border-radius:6px;padding:1.4rem 1.4rem;white-space:pre-wrap;max-height:62vh;overflow-y:auto;box-shadow:0 12px 40px #0002;animation:in .8s both}
+nav{position:fixed;bottom:0;left:0;right:0;display:flex;justify-content:space-between;padding:.8rem 1rem calc(.8rem + env(safe-area-inset-bottom,0px));z-index:5}
+nav button{background:var(--card);border:1px solid var(--line);border-radius:99px;padding:.4rem 1.2rem;backdrop-filter:blur(6px)}
+nav button:disabled{opacity:.3;cursor:default}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+html,body{height:100%}
+body{font-family:Quicksand,sans-serif;font-size:clamp(15px,3.9vw,17.5px);font-weight:500;background:radial-gradient(circle at 12% 8%,#ff9cc855,transparent 42%),radial-gradient(circle at 90% 92%,#ffd0a055,transparent 42%),radial-gradient(circle at 85% 15%,#c9b2ff44,transparent 35%),var(--bg);height:100dvh}
+h1,h2{font-family:Fredoka,sans-serif;font-style:normal;font-weight:600;line-height:1.2;color:var(--ink)}
+h1{font-size:clamp(2rem,8.5vw,3.8rem)}h2{font-size:clamp(1.6rem,6.2vw,2.5rem)}
+main{height:100dvh}
+.wrap{max-width:680px}
+.page{padding:4.2rem 1.1rem 6rem}
+.btn{font-family:Fredoka,sans-serif;font-size:1.1rem;min-height:48px;padding:.7rem 2rem;background:linear-gradient(135deg,#ff7aa8,#ff5c93);animation:wob 3s ease-in-out infinite}
+@keyframes wob{0%,100%{transform:rotate(-2deg)}50%{transform:rotate(2deg) scale(1.04)}}
+.big-heart{font-size:clamp(3.6rem,16vw,5.5rem);filter:drop-shadow(0 6px 10px #ff5c9366)}
+#type,#msg{font-family:Caveat,cursive;font-style:normal;font-size:clamp(1.5rem,5.6vw,2rem);line-height:1.35;border-left:0;background:var(--card);border:2px dashed var(--rose);border-radius:22px;padding:1rem 1.2rem}
+#msg{min-height:5.2em;display:flex;align-items:center;justify-content:center}
+#type{min-height:8.5em;text-align:center}
+.grid{
+  grid-template-columns:repeat(2,1fr);
+  gap:.7rem;
+}
+.flip{height:clamp(130px,30vw,160px)}
+.flip b,.flip u{border-radius:24px;border:2px solid var(--rose);box-shadow:0 8px 18px #ff5c9322;font-size:clamp(.85rem,3.2vw,1rem)}
+.flip b{font-family:Fredoka,sans-serif;font-style:normal;font-size:clamp(1.15rem,4.5vw,1.5rem)}
+.flip b::after{content:" 🌸"}
+.tl{border-left:3px dotted var(--rose)}
+.tl button,.pr button{border-radius:20px;border:2px solid var(--line);min-height:48px;transition:transform .2s,border-color .3s}
+.tl button:active,.pr button:active,.flip:active{transform:scale(.96)}
+.tl button strong{font-family:Fredoka,sans-serif;font-style:normal;font-size:1.1rem}
+.pr button.d{border-color:var(--gold);background:#ffd39a33}
+#env{border-radius:14px;background:linear-gradient(135deg,#ff8db3,#ff5c93);height:clamp(150px,40vw,190px)}
+#letter{font-size:clamp(1.3rem,4.8vw,1.65rem);border-radius:18px;border:2px solid var(--rose);background:repeating-linear-gradient(transparent 0 1.9rem,#ff5c9322 1.9rem calc(1.9rem + 1px)),var(--card);max-height:64dvh}
+nav{align-items:center;gap:.5rem}
+nav button{min-height:44px;font-family:Fredoka,sans-serif;border:2px solid var(--line);white-space:nowrap}
+#say{flex:1;text-align:center;font-family:Caveat,cursive;font-size:clamp(1rem,4vw,1.3rem);line-height:1.05;color:var(--soft)}
+#dots{gap:.4rem}
+#dots button{width:9px;height:9px}
+.sp{position:fixed;z-index:20;pointer-events:none;font-size:18px;animation:pop .9s ease-out forwards}
+@keyframes pop{to{transform:translate(var(--x),var(--y)) scale(1.3);opacity:0}}
+@media (max-width:380px){nav button{padding:.4rem .8rem;font-size:.9rem}#say{display:none}nav{justify-content:space-between}}
+@media (max-height:560px){.page{padding-top:3.4rem;padding-bottom:4.6rem}.big-heart{font-size:2.6rem}.lead{margin:.3rem auto .8rem}#type{min-height:6em}}
+@media (min-width:900px){body{font-size:19px}.wrap{max-width:760px}.grid{grid-template-columns:repeat(4,1fr)}}
+@media (prefers-reduced-motion:reduce){.sp{display:none}}
+#type,#msg,.pr button,.lead{white-space:pre-line}
+h2::after{content:"❦";display:block;color:var(--gold);font-size:1rem;margin-top:.15rem}
+.pr button{line-height:1.5}
+#letter{font-size:clamp(1.25rem,4.6vw,1.6rem)}
+#sky{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:0;background:linear-gradient(180deg,#ffb8d833 0%,transparent 45%,#ffd6a844 100%)}
+#hearts{z-index:1}
+main{z-index:2}
+.orb{position:absolute;top:10%;right:9%;width:clamp(46px,12vw,72px);aspect-ratio:1;border-radius:50%;background:var(--orb);box-shadow:var(--orbsh);animation:glow 5s ease-in-out infinite}
+@keyframes glow{50%{transform:scale(1.07)}}
+.cl{position:absolute;left:0;width:200px;height:58px;border-radius:99px;background:var(--cloud);animation:drift linear infinite}
+.cl::before,.cl::after{content:"";position:absolute;background:inherit;border-radius:50%}
+.cl::before{width:88px;height:88px;top:-42px;left:26px}
+.cl::after{width:66px;height:66px;top:-28px;right:24px}
+.c1{top:16%;animation-duration:70s}
+.c2{top:46%;transform:scale(.7);animation-duration:95s;animation-delay:-40s}
+.c3{top:74%;transform:scale(1.15);animation-duration:120s;animation-delay:-80s}
+@keyframes drift{from{translate:-320px 0}to{translate:calc(100vw + 120px) 0}}
+#stars i{position:absolute;border-radius:50%;background:var(--star);opacity:var(--staro);animation:tw 3s ease-in-out infinite}
+@keyframes tw{50%{opacity:.1;transform:scale(.6)}}
+/* Full Shayari Cards */
+.flip u{
+  padding: .55rem .65rem;
+  font-size: clamp(.72rem, 2.55vw, .88rem);
+  line-height: 1.35;
+  text-align: center;
+  overflow-y: auto;
+  word-break: normal;
+}
+
+.flip b{
+  font-size: clamp(1.1rem, 4vw, 1.4rem);
+}
+
+@media (max-width:380px){
+  .flip{
+    height: 145px;
+  }
+
+  .flip u{
+    padding: .45rem .5rem;
+    font-size: .68rem;
+    line-height: 1.3;
+  }
+}
+.flip b span{
+  display:none;
+}
+
+.flip b{
+  font-size:2rem !important;
+}
+</style>
+</head>
+<body>
+<audio id="bgMusic" autoplay loop>
+  <source src="song.mp3" type="audio/mpeg">
+</audio>
+<div id="sky" aria-hidden="true"><i class="orb"></i><i class="cl c1"></i><i class="cl c2"></i><i class="cl c3"></i><div id="stars"></div></div>
+<div id="hearts" aria-hidden="true"></div>
+<header><div id="dots" role="tablist" aria-label="Pages"></div><button class="tog" id="theme" aria-label="Theme badlo">🌙</button></header>
+<main>
+<section class="page"><div class="wrap"><div class="big-heart">♥</div><h1>Main yahin hoon,<br>kahin nahi ja raha 🧸</h1><p class="lead">Dil ki baat, shayari ki zubaan mein.<br></p><button class="btn" data-go="1">Shuru karo</button></div></section>
+
+<section class="page"><div class="wrap"><h2>Tum mere liye kya ho</h2><p class="lead">Ek sher, tumhare naam.</p><div id="type" aria-live="polite"></div></div></section>
+
+<section class="page"><div class="wrap"><h2>Jo mujhe tumhare baare mein pasand hai</h2><p class="lead">Card par tap karo, ek ek sher khulega.</p>
+<div class="grid" id="cards"></div></div></section>
+
+<section class="page"><div class="wrap"><h2>Mera pyaar kitna hai?</h2><p class="lead">Slider hilao, ek ek sher khulega.</p><span id="sh">♥</span>
+<input type="range" id="rg" min="0" max="100" value="10" aria-label="Pyaar kitna"><div id="msg"></div></div></section>
+
+<section class="page"><div class="wrap"><h2>Mere wade tumse</h2><p class="lead">Jo wade dil se sach lage, un par tap karo.</p><div class="pr" id="pr"></div><p id="pc" class="lead"></p></div></section>
+
+<section class="page"><div class="wrap"><h2>Tumhare naam ek khat</h2><p class="lead" id="hint">Jab bhi shak ho, yeh khat dobara kholna.</p>
+<button id="env" aria-label="Khat kholo"><span>♥</span></button><div id="letter" aria-live="polite"></div></div></section>
+</main>
+<nav><button id="prev">← Peeche</button><div id="say" aria-live="polite"></div><button id="next">Aage →</button></nav>
+
+<script>
+// ✏️ Yahan apni baatein badlo
+const NAME="Jaan";
+const STORY = "Tum meri khushi, tum meri jaan ho,\nMeri har dua ka tum hi armaan ho.\nMeri har subah mein tumhari roshni si hai,\nMeri har shaam mein tumhari kami si hai.\n\nTum paas raho toh dil ko sukoon milta hai,\nTumse baat ho toh har gham bhoolta hai.\nLafzon mein kahun toh shayad baat adhuri rahe,\nTum meri woh mohabbat ho,\njiske bina meri har khushi adhuri rahe.\n\nTum sirf meri mohabbat nahi,\nmeri har khwaahish ka naam ho,\nMeri zindagi ki sabse khoobsurat wajah,\nmeri Muskan, tum hi meri jaan ho.";
+const CARDS=[
+  ["Meri Khushi","Tum meri khushi ki wajah nahi,<br>meri khushi ka matlab ho,<br>tumse baat na ho toh kuch adhura sa lage,<br>aur tum muskura do toh sab poora sa lage."],
+
+  ["Meri Mohabbat","Pata nahi tumse itni mohabbat kyun hai,<br>bas itna jaanta hoon tum zaroori ho,<br>duniya chahe kitni bhi khoobsurat kyun na ho,<br>meri duniya mein sabse khoobsurat tum ho."],
+
+  ["Jaisi Ho","Tum jaisi ho, mujhe waise hi pasand ho,<br>tumhari har kami bhi mujhe apni si lagti hai,<br>tumhe badalne ki khwahish kabhi nahi hogi,<br>kyunki tumhari har ada mujhe mohabbat si lagti hai."],
+
+  ["Tum Tak","Kabhi khush hoon toh sabse pehle tum yaad aati ho,<br>kabhi udaas hoon toh tumhari zaroorat padti hai,<br>shayad isi ko mohabbat kehte hain,<br>jab dil ki har raah aakhir tum tak hi jaati hai."]
+];
+const MSG=[[0,"Ek boond jitna hai abhi,\nyeh pyaar to shuruaat hai."],[25,"Dariya ban ke behta hai,\nrukna isko aata nahi."],[50,"Samandar se gehra hai,\nkinara iska koi nahi."],[75,"Aasmaan bhi chhota pad gaya,\nitna bada yeh ehsaas hai."],[95,"Lafz kam pad gaye, isliye khat likha,\ntum akeli nahi ho, main saath hoon sada."]];
+const PROM=[
+  "Jab tum ghabrao, mera haath thaam lena,\ndoor sahi, par mujhe apne paas maan lena.",
+
+  "Tumhari har baat ko dil se sunta rahunga,\ntum chup bhi raho toh tumhe samajhta rahunga.",
+
+  "Jo baat dil ko chubhe, mujhse keh dena,\nkhamoshi mein dard kabhi sehna nahi.",
+
+  "Tum anmol ho, ye lafz bhi kam pad jaayein,\ntumhari misaal doon toh sitare bhi sharma jaayein.",
+
+  "Jaise chaho tum, waise hi tumhe samjhunga,\ntumhari har khushi ka khayal rakhunga.\nDuniya chahe jo kahe, mujhe farq nahi padega,\nbas tera tha, tera hoon, aur tera hi rahunga."
+];
+const LETTER="Meri shivaya ki mummy "+NAME+",\n\nPata hai, shayad main har baar ajeeb behave karta hoon, aur kabhi-kabhi meri baaton ya meri galtiyon se tumhe hurt bhi hua hoga. Lekin ab main tumhe sirf pyaar karna nahi chahta, tumhe samajhna bhi chahta hoon. Main tumhe thoda nahi, jitna jaan sakta hoon utna jaan chuka hoon. Tumhari khushi, tumhari narazgi, tumhari khamoshi aur tumhari chhoti-chhoti baatein mere liye important hain.\n\nMain tumhe kabhi galti se bhi hurt nahi karunga. Agar kabhi tumhe meri kisi baat se bura lage, toh mujhe bata dena, main sununga, samjhunga aur khud ko behtar karunga. Main tumhara dhyan rakhunga, tumhe sambhalunga, tumhe aur zyada pyaar aur respect dunga. Tumhe jaisa pyaar chahiye, jaisa care chahiye, jaisa treatment chahiye — main usse samajhne aur uske liye khud ko badalne ki poori koshish karunga.\n\nMujhe tumhe badalna nahi hai. Tum jaisi ho, mujhe waise hi rehna hai tumhare saath. Tumhe apni zindagi apne tareeke se jeeni hai, jaise rehna hai waise rehna hai. Mujhe tumse tumhari koi cheez nahi chahiye, bas tumhara pyaar chahiye. Baaki jo bhi hai, jo bhi zaroorat hogi, jo bhi karna padega — main karunga. Bas mujhe tumhara woh pyaar chahiye.\n\nAur main tumhara trust galti se bhi nahi tootne dunga. Jo thoda sa bhi trust tumne mujhpar kiya hai, mere liye woh bahut keemti hai. Main har din apne actions se tumhe feel karwana chahta hoon ki tumne mujhpar bharosa karke galat nahi kiya.\n\nMain tumse bahut pyaar karta hoon. Itna ki kabhi-kabhi lafz kam pad jaate hain. Mujhe tumhe hurt nahi karna, mujhe tumhare saath har cheez ko sambhalna hai. Tumhe khush rakhna hai, sukoon mein rakhna hai, tumhe apni tarah rehne dena hai. Bas mere pyaar ko apne paas rakhna. Baaki teri har ek takleef meri hai, har dukh mein tujhe sambhal lunga.\n\nMohabbat tumse itni hai, jaise samandar ko apni gehraai se,\njaise chaand ko raat se, jaise rooh ko saans ki zaroorat ho jaise.\nTum meri aadat nahi, meri woh zaroorat ho jo dil se juda nahi hoti,\ntumse door rehkar bhi meri har dhadkan tumhari hi baat karti.\nDuniya ki har khoobsurti ek taraf, aur tum ek taraf ho,\nmain tumhe had se nahi, har had ke us paar tak chahta hoon,\nbas itna samajh lo Muskan, mera ishq khatam nahi hota — tum par aakar aur gehra ho jaata hai.\n\nIshq-e-Tumhara,\n♥";
+const SAY=["","Suno zara… 🥺","Tap karke dekho 🌸","Slider hilao ✨","Pakke wade 🤞","Tumhare liye 💌"];
+const $=s=>document.querySelector(s),pages=[...document.querySelectorAll('.page')];let cur=0,typed=false,lt=false;
+const dots=$('#dots');pages.forEach((_,i)=>{const b=document.createElement('button');b.setAttribute('aria-label','Page '+(i+1));b.onclick=()=>go(i);dots.append(b)});
+function go(n){n=Math.max(0,Math.min(pages.length-1,n));$("#say").textContent=SAY[n];pages[cur].classList.remove('show');pages[n].style.setProperty('--dx',n>=cur?'30px':'-30px');cur=n;pages[n].classList.add('show');
+[...dots.children].forEach((d,i)=>d.classList.toggle('on',i===n));$('#prev').disabled=n===0;$('#next').disabled=n===pages.length-1;if(n===1&&!typed){typed=true;type($('#type'),STORY)}}
+function type(el,t,cb){let i=0;el.textContent='';(function s(){el.textContent=t.slice(0,++i);el.scrollTop=el.scrollHeight;if(i<t.length)setTimeout(s,38);else cb&&cb()})()}
+$('#prev').onclick=()=>go(cur-1);$('#next').onclick=()=>go(cur+1);document.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>go(+b.dataset.go));
+addEventListener('keydown',e=>{if(e.key==='ArrowRight')go(cur+1);if(e.key==='ArrowLeft')go(cur-1)});
+let sx=0;addEventListener('touchstart',e=>sx=e.touches[0].clientX,{passive:true});addEventListener('touchend',e=>{const d=e.changedTouches[0].clientX-sx;if(Math.abs(d)>70)go(cur+(d<0?1:-1))},{passive:true});
+
+CARDS.forEach(([a,b])=>{const c=document.createElement('button');c.className='flip';c.innerHTML='<i><b><span>'+a+'</span>🌸</b><u>'+b+'</u></i>';c.onclick=()=>c.classList.toggle('f');$('#cards').append(c)});
+const rg=$('#rg');function feel(){const v=+rg.value;let m=MSG[0][1];MSG.forEach(x=>{if(v>=x[0])m=x[1]});$('#msg').textContent=m;$('#sh').style.transform='scale('+(1+v/40)+')'}rg.oninput=feel;feel();
+PROM.forEach(t=>{const c=document.createElement('button');c.textContent=t;c.onclick=()=>{c.classList.toggle('d');const n=document.querySelectorAll('.pr .d').length;$('#pc').textContent=n===PROM.length?'Saare wade dil se. Ab aakhri page par chalo ♥':n+' / '+PROM.length+' wade'};$('#pr').append(c)});
+$('#env').onclick=()=>{if(lt)return;lt=true;$('#env').style.display='none';$('#hint').style.display='none';const L=$('#letter');L.style.display='block';let i=0;L.onclick=()=>{i=LETTER.length-1};(function s(){L.textContent=LETTER.slice(0,++i);L.scrollTop=L.scrollHeight;if(i<LETTER.length)setTimeout(s,26);else burst()})()};
+function heart(){const h=document.createElement('div');h.className='fh';h.textContent='♥';h.style.left=Math.random()*100+'%';h.style.fontSize=10+Math.random()*22+'px';h.style.animationDuration=7+Math.random()*7+'s';$('#hearts').append(h);setTimeout(()=>h.remove(),15000)}
+function burst(){for(let i=0;i<45;i++)setTimeout(heart,i*90)}
+setInterval(heart,1400);
+for(let i=0;i<55;i++){const t=document.createElement('i'),z=1+Math.random()*2.2;t.style.cssText='left:'+Math.random()*100+'%;top:'+Math.random()*100+'%;width:'+z+'px;height:'+z+'px;animation-delay:-'+Math.random()*3+'s;animation-duration:'+(2+Math.random()*3)+'s';$('#stars').append(t)}
+document.querySelectorAll("h2").forEach((h,i)=>h.append(" "+["🧸","🌸","💗","🤞","💌"][i]));
+addEventListener("pointerdown",e=>{if(e.target.closest("input"))return;for(let i=0;i<6;i++){const q=document.createElement("span");q.className="sp";q.textContent=["💗","✨","🌸","💖"][i%4];q.style.left=e.clientX+"px";q.style.top=e.clientY+"px";q.style.setProperty("--x",(Math.random()*120-60)+"px");q.style.setProperty("--y",(-30-Math.random()*70)+"px");document.body.append(q);setTimeout(()=>q.remove(),900)}});
+const root=document.documentElement,tb=$('#theme');function dk(){return root.dataset.theme?root.dataset.theme==='dark':matchMedia('(prefers-color-scheme:dark)').matches}
+function ic(){tb.textContent=dk()?'☀️':'🌙'}ic();tb.onclick=()=>{root.dataset.theme=dk()?'light':'dark';ic()};
+go(0);
+const bgMusic = document.getElementById("bgMusic");
+
+document.addEventListener("click", () => {
+  bgMusic.play().catch(() => {});
+}, { once: true });
+</script>
+</body>
+</html>
